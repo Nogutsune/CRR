@@ -24,12 +24,12 @@ pipeline {
         }
         stage('terraform init') {
             steps {
-                sh 'sudo /home/vagrant/terraform init ./CRR'
+                sh 'cd ./CRR; sudo terraform init'
             }
         }
         stage('terraform plan') {
             steps {
-                sh 'ls ./CRR; sudo /home/vagrant/terraform plan ./CRR'
+                sh 'ls ./CRR; sudo terraform plan'
             }
         }
         stage('terraform ended') {
