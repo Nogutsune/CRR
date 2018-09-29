@@ -14,7 +14,7 @@ pipeline {
         }
         stage('git clone') {
             steps {
-                sh 'sudo rm -r *;sudo git clone https://github.com/Nogutsune/CRR.git'
+                sh 'sudo git clone https://github.com/Nogutsune/CRR.git'
             }
         }
         stage('tfsvars create'){
