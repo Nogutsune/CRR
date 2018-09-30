@@ -3,11 +3,22 @@ provider "aws" {
   
 }
 
-resource "aws_instance" "web" {
-  ami           = "ami-04681a1dbd79675a5"
-  instance_type = "t2.micro"
+resource "aws_iam_role" "replication" {
+  name = "tf-iam-role-replication-12349995"
 
-  tags {
-    Name = "HelloWorld"
-  }
+  assume_role_policy = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+POLICY
 }
