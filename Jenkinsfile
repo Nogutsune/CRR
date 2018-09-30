@@ -17,11 +17,7 @@ pipeline {
                 sh 'sudo git clone https://github.com/Nogutsune/CRR.git'
             }
         }
-        stage('tfsvars create'){
-            steps {
-                sh 'sudo cp /home/vagrant/vars.tf ./CRR/'
-            }
-        }
+        
         stage('terraform init') {
             steps {
                 sh 'cd ./CRR; sudo terraform init'
