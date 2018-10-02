@@ -20,7 +20,7 @@ pipeline {
         
         stage('terraform init') {
             steps {
-                sh 'cd ./CRR/Terraform;sudo terraform init;'
+                sh 'cd ./CRR/Terraform; sudo terraform init'
             }
         }
 		stage('deploy') {
