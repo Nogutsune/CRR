@@ -20,18 +20,15 @@ pipeline {
         
         stage('terraform init') {
             steps {
-                sh 'cd ./CRR;'
+                sh 'cd ./CRR/Terraform;sudo terraform init;'
             }
         }
 		stage('deploy') {
     steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-        credentialsId: 'Source', 
-        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+         
    
-            sh " ls ./CRR; sudo terraform init ; sudo terraform plan -var 'access_key=${AWS_ACCESS_KEY_ID}'  -var 'secret_key=${AWS_SECRET_ACCESS_KEY}'"
-        }
+            sh " ls ./CRR/Terraform; sudo terraform plan "
+        
     }
 }
         stage('terraform plan') {
