@@ -1,0 +1,17 @@
+{
+   "Role":"arn:aws:iam::028497140120:role/tf-iam-role-replication-123",
+   "Rules":[
+      {
+         "Status":"Enabled",
+        "Prefix":"",
+         "Status":"Enabled",
+         "Destination":{
+            "Bucket":"arn:aws:s3:::any--unique--bucket--destination123",
+            "Account":"648791014442",
+            "AccessControlTranslation":{
+               "Owner":"Destination"
+            }
+         }
+      }
+   ]
+}
