@@ -12,6 +12,7 @@ pipeline {
                 sh 'echo "Started...!" '
             }
         }
+		
         stage('git clone') {
             steps {
                 sh 'sudo git clone https://github.com/Nogutsune/CRR.git'
@@ -23,19 +24,30 @@ pipeline {
                 sh 'cd ./CRR/Terraform; sudo terraform init'
             }
         }
-		stage('deploy') {
-    steps {
-         
-   
-            sh " ls ./CRR/Terraform; sudo terraform plan -out= plan.out"
-        
-    }
-}
-        stage('terraform plan') {
+		
+	stage('terraform plan') {
             steps {
-                sh 'Plan executed'
+                   sh " ls ./CRR/Terraform; sudo terraform plan -out= plan.out "
+				}
+        }
+		
+        stage('terraform apply') {
+            steps {
+                sh 'sudo terraform apply -out= plan.out -auto-approve'
             }
         }
+	stage('clean up') {
+            steps {
+                sh 'sudo rm -rf plan.out'
+            }
+        }
+		
+        stage('destination bucket ownership transfer') {
+            steps {
+                sh './run.sh'
+            }
+        }
+		
         stage('terraform ended') {
             steps {
                 sh 'echo "Ended....!!"'
