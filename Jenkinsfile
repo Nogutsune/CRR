@@ -27,7 +27,7 @@ pipeline {
     steps {
          
    
-            sh " ls ./CRR/Terraform; sudo terraform plan -input=false "
+            sh " ls ./CRR/Terraform; sudo terraform plan -out= changes.terraform"
         
     }
 }
