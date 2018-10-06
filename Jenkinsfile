@@ -27,13 +27,13 @@ pipeline {
 		
 	stage('terraform plan') {
             steps {
-                   sh " ls ./CRR/Terraform; sudo terraform plan -out= plan.out "
+                   sh " ls ./CRR/Terraform; sudo terraform plan -out plan.out "
 				}
         }
 		
         stage('terraform apply') {
             steps {
-                sh 'sudo terraform apply -out= plan.out -auto-approve'
+                sh 'sudo terraform apply -auto-approve "plan.out" '
             }
         }
 	stage('clean up') {
