@@ -36,12 +36,25 @@ pipeline {
                 sh 'sudo terraform apply -auto-approve "plan.out" '
             }
         }
+	    
+        stage('terraform output') {
+            steps {
+                sh 'sudo terraform output >> output.txt '
+            }
+        }
+	    
 	stage('clean up') {
             steps {
                 sh 'sudo rm -rf plan.out'
             }
         }
-		
+	
+	stage('Creation of replication.json') {
+            steps {
+                sh 'python replication.py'
+            }
+        }
+	    
         stage('destination bucket ownership transfer') {
             steps {
                 sh './run.sh'
